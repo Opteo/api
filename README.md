@@ -55,6 +55,19 @@ const content = await rawResponse.json();
 
 All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
 
+## Errors
+
+The Opteo API uses standard [HTTP response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status). All successful requests will return a `200` status code and any errors will be in the range `400` (client) to `500` (server).
+
+All failing requests will return the `status` code and a descriptive error `message`. For example, if you attempt to access resources for a non-active customer:
+
+```json
+{
+  "status": 403,
+  "message": "Forbidden - Client not active in Opteo, this may be due to a billing problem, or because it isn't selected in Linked Accounts"
+}
+```
+
 ## Resources
 
 ---
