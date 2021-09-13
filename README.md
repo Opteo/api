@@ -88,3 +88,35 @@ _none required_
 ```
 
 ### Update a budget
+
+Update the Opteo budget for a connected Google Ads account. You must specify the new `budget` in the JSON request body.
+
+**URL**
+
+```
+POST https://api.opteo.dev/v0/customers/{customer-id}/budget
+```
+
+**Parameters**
+
+```json
+{
+  "budget": 123.45
+}
+```
+
+**Response**
+
+```json
+{
+  "status": 200,
+  "data": {
+    "lastUpdated": "2021-09-09T15:02:30.000Z",
+    "budget": 123.45
+  }
+}
+```
+
+## Improvements
+
+_coming soon_
