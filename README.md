@@ -102,6 +102,8 @@ _none required_
 }
 ```
 
+In the case where no budget has ever been set in Opteo, the `budget` will be `0` and `lastUpdated` will be `null`.
+
 ### Update a budget
 
 Update the Opteo budget for a connected Google Ads account. You must specify the new `budget` in the JSON request body.
