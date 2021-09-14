@@ -18,6 +18,8 @@ You must specify the API version and base customer resource when building reques
 https://api.opteo.dev/v0/customers/{customer-id}/{resource}
 ```
 
+Note: the customer id refers to the Google Ads customer id. [This is found in Google Ads, not Opteo](https://support.google.com/google-ads/answer/1704344?hl=en).
+
 ---
 
 ## Authentication
