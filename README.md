@@ -155,7 +155,7 @@ _none required_
 
 **Response**
 
-```json
+```javascript
 {
   "status": 200,
   "data": [
