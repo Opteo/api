@@ -136,4 +136,54 @@ POST https://api.opteo.dev/v0/customers/{customer-id}/budget
 
 ## Improvements
 
+### Get Active Improvements
+
+Get a list of improvements that are currently available for a linked Google Ads account. This list
+will reflect the contents of the "Active" tab in the Opteo interface.
+
+Improvements that are completed or dismissed will no longer be available in this list.
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/customers/{customer-id}/improvements
+```
+
+**Parameters**
+
+_none required_
+
+**Response**
+
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "improvement_id": 1234,
+      "url": "https://app.opteo.com/user/:user_id/domain/4567/improvements/active/1234",
+      "title": "Write New Ad", // Title of the improvement. Is sometimes dynamic based on the contents of the improvement.
+      "type": "ad_comparison_v2", // Type of the improvement, as an enum.
+      "rec_action": "write_ad_v2", // The action that we're recommending, as an enum.
+      "created_ts": "2022-03-15T04:44:35.000Z", // When the improvement was created.
+      "last_updated_ts": "2022-04-12T09:30:35.000Z", // When the improvement was last updated with new data.
+      "location": [
+        // The location in the Google Ads account that the improvement is concerned with.
+        {
+          "entity": "campaign",
+          "label": "My Campaign Name"
+        },
+        {
+          "entity": "adgroup",
+          "label": "My Adgroup Name"
+        }
+      ]
+    },
+    ...
+  ]
+}
+```
+
+### Get Completed Improvements
+
 _coming soon_
