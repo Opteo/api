@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://opteo.com">
-    <img src="https://app.opteo.com/icons/logo.svg">
+    <img src="https://app.opteo.com/img/opteo-icon-120.png" width="60">
   </a>
 </p>
 
