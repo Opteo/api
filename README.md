@@ -136,10 +136,10 @@ POST https://api.opteo.dev/v0/customers/{customer-id}/budget
 
 ## Improvements
 
-### Get Active Improvements
+### Get active improvements
 
 Get a list of improvements that are currently available for a linked Google Ads account. This list
-will reflect the contents of the "Active" tab in the Opteo interface.
+will reflect the contents of the "Active" tab in the Opteo interface, and will be sorted by "priority", which is a rough measure of an improvement's impact to the account.
 
 Improvements that are completed or dismissed will no longer be available in this list.
 
