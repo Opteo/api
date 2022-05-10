@@ -191,7 +191,7 @@ _none required_
 }
 ```
 
-### Get Completed Improvements
+### Get completed improvements
 
 Get a list of improvements that have been completed for a linked Google Ads account.
 
