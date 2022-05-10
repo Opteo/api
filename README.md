@@ -161,7 +161,7 @@ _none required_
   "data": [
     {
       "improvement_id": 1234,
-      "url": "https://app.opteo.com/user/:user_id/domain/4567/improvements/active/1234",
+      "url": "https://app.opteo.com/user/:user_id/account/4567/improvements/active/1234",
       "title": "Write New Ad", // Title of the improvement. Is sometimes dynamic based on the contents of the improvement.
       "type": "ad_comparison_v2", // Type of the improvement, as an enum.
       "rec_action": "write_ad_v2", // The action that we're recommending, as an enum.
@@ -176,7 +176,14 @@ _none required_
         {
           "entity": "adgroup",
           "label": "My Adgroup Name"
-        }
+        },
+        // The "text_description" and "text_variables" are designed to help surface key
+        // information about an improvement.
+        "text_description": "The ad group My Ad Group only contains one ad. Create a new ad for this ad group so you can test for the best-performing creative approach.",
+        "text_variables": {
+          "Campaign": "My Campaign",
+          "Ad Group": "My Ad Group",
+        },
       ]
     },
     ...
@@ -186,4 +193,53 @@ _none required_
 
 ### Get Completed Improvements
 
-_coming soon_
+Get a list of improvements that have been completed for a linked Google Ads account.
+
+This list will reflect the contents of the "Completed" tab in the Opteo interface.
+
+It is sorted by `completed_ts`, which is the time when the improvement was pushed (descending).
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/customers/{customer-id}/improvements/completed
+```
+
+**Parameters**
+
+_none required_
+
+**Response**
+
+```javascript
+{
+  "status": 200,
+  "data": [
+    {
+      "improvement_id": 5678,
+      "url": "https://app.opteo.com/user/:user_id/account/1234/improvements/completed/5678",
+      "title": "Add New Keyword", // Title of the improvement. Is sometimes dynamic based on the contents of the improvement.
+      "type": "sqr", // Type of the improvement, as an enum.
+      "rec_action": "check_query_relevance", // The action that we're recommending, as an enum.
+      "completed_ts": "2021-09-07T14:00:50.000Z", // When the improvement was pushed.
+      // The location in the Google Ads account that the improvement is concerned with.
+      "location": [
+        {
+          "entity": "search-query",
+          "label": "hotels near me"
+        }
+      ],
+      // The "text_description" and "text_variables" are designed to help surface key
+      // information about an improvement.
+      "text_description": "The search term `hotels near me` is triggering your ads, but has not been added to your account as a keyword. You may want to add `hotels near me` as a new keyword or a negative keyword.",
+      "text_variables": {
+        "Cost": "$12.00",
+        "Conversions": "2",
+        "CPA": "$6.00"
+      },
+      "completed_by_email": "steven@agency.com"
+    },
+    ...
+  ]
+}
+```
