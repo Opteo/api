@@ -141,7 +141,7 @@ POST https://api.opteo.dev/v0/customers/{customer-id}/budget
 Get a list of improvements that are currently available for a linked Google Ads account. This list
 will reflect the contents of the "Active" tab in the Opteo interface, and will be sorted by "priority", which is a rough measure of an improvement's impact to the account.
 
-Improvements that are completed or dismissed will no longer be available in this list.
+Improvements that are completed or dismissed will not be returned.
 
 **URL**
 
@@ -243,3 +243,75 @@ _none required_
   ]
 }
 ```
+
+## Reports
+
+### Get all reports
+
+Get a list of all reports for all linked accounts.
+Each item in the list will include a `pdfPath`, which
+can be used to fetch the report's PDF export.
+
+Archived or deleted reports will not be returned.
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/reports
+```
+
+**Parameters**
+
+_none required_
+
+**Response**
+
+```javascript
+{
+	"status": 200,
+	"data": [
+		{
+			"accountId": 1234,
+			"accountName": "Plumbers Ltd",
+			"title": "Google Ads Report",
+			"fromDate": "2023-04-01",
+			"toDate": "2023-04-30",
+			"pdfPath": "/v0/reports/pdf/09440bbe-1638-4084-4378-c0d20e3ffefe"
+		},
+		{
+			"accountId": 1234,
+			"accountName": "Plumbers Ltd",
+			"title": "Google Ads Report",
+			"fromDate": "2023-03-01",
+			"toDate": "2023-03-30",
+			"pdfPath": "/v0/reports/pdf/daf46eb4-4901-45c4-9e75-de58db6effff"
+		},
+		{
+			"accountId": 3456,
+			"accountName": "Electricians Online",
+			"title": "Google Ads Report",
+			"fromDate": "2023-04-01",
+			"toDate": "2023-04-30",
+			"pdfPath": "/v0/reports/pdf/f1be9043-17a0-4a3d-8689-91d40deeffff"
+		}
+  ]
+}
+```
+
+### Get a report PDF
+
+Get the rendered PDF for a single report.
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/reports/pdf/{report-uuid}
+```
+
+**Parameters**
+
+_none required_
+
+**Response**
+
+The PDF will be returned as a binary response with the `Content-Type` header set to `application/pdf`.
