@@ -314,4 +314,6 @@ _none required_
 
 **Response**
 
+```
 The PDF will be returned as a binary response with the `Content-Type` header set to `application/pdf`.
+```
