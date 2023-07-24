@@ -10,9 +10,29 @@ The Opteo API allows you to retrieve and modify your Opteo account data programm
 
 > ⚠️ The Opteo API is currently invite only and still a work in progress
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Authentication](#authentication)
+- [Errors](#errors)
+- [Customers](#customers)
+  - [List](#list-customers)
+- [Budgets](#budgets)
+  - [Get](#get-a-budget)
+  - [Update](#update-a-budget)
+- [Improvements](#improvements)
+  - [Get active](#get-active-improvements)
+  - [Get completed](#get-completed-improvements)
+- [Reports](#reports)
+  - [Get all reports](#get-all-reports)
+  - [Get PDF](#get-a-report-pdf)
+- [GAQL](#gaql)
+
+## Introduction
+
 **Base URL**: https://api.opteo.dev
 
-You must specify the API version and base customer resource when building request URLs for your desired endpoint
+You must specify the API version and base customer resource when building request URLs for your desired endpoint. For example:
 
 ```
 https://api.opteo.dev/v0/customers/{customer-id}/{resource}
@@ -70,25 +90,47 @@ All failing requests will return the `status` code and a descriptive error `mess
 }
 ```
 
-## Resources
+## Customers
 
----
+### List customers
+
+Get the list of customers (aka google ads accounts) that are accessible using the supplied API token. These customers must be [linked in Opteo](https://opteo.com/docs/en/articles/823760-link-unlink-accounts-to-your-account-centre).
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/customers
+```
+
+**Response**
+
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "customerId": "123-456-7890",
+      "name": "Plumbers United"
+    },
+    {
+      "customerId": "098-765-4321",
+      "name": "Electricians Online"
+    }
+  ]
+}
+```
 
 ## Budgets
 
-### Retrieve a budget
+### Get a budget
 
-Retrieve the set Opteo budget for a connected Google Ads account. No ID is required to retrieve the budget.
+Get the set Opteo budget for a connected Google Ads account. No ID is required to get the budget.
 
 **URL**
 
 ```
 GET https://api.opteo.dev/v0/customers/{customer-id}/budget
 ```
-
-**Parameters**
-
-_none required_
 
 **Response**
 
@@ -149,10 +191,6 @@ Improvements that are completed or dismissed will not be returned.
 GET https://api.opteo.dev/v0/customers/{customer-id}/improvements
 ```
 
-**Parameters**
-
-_none required_
-
 **Response**
 
 ```javascript
@@ -205,10 +243,6 @@ It is sorted by `completed_ts`, which is the time when the improvement was pushe
 GET https://api.opteo.dev/v0/customers/{customer-id}/improvements/completed
 ```
 
-**Parameters**
-
-_none required_
-
 **Response**
 
 ```javascript
@@ -260,10 +294,6 @@ Archived or deleted reports will not be returned.
 GET https://api.opteo.dev/v0/reports
 ```
 
-**Parameters**
-
-_none required_
-
 **Response**
 
 ```javascript
@@ -308,12 +338,62 @@ Get the rendered PDF for a single report.
 GET https://api.opteo.dev/v0/reports/pdf/{report-uuid}
 ```
 
-**Parameters**
-
-_none required_
-
 **Response**
 
 ```
 The PDF will be returned as a binary response with the `Content-Type` header set to `application/pdf`.
+```
+
+## GAQL
+
+This API supports making [GAQL queries](https://developers.google.com/google-ads/api/docs/query/overview) to retrieve arbitrary data from Google Ads. GAQL queries are similar to SQL queries, but are specific to the Google Ads API.
+
+- For details on how to write GAQL queries, see the [GAQL reference](https://developers.google.com/google-ads/api/docs/query/overview).
+- For a complete list of what can be fetched via GAQL, see the [Google Ads API reference](https://developers.google.com/google-ads/api/fields/v14/overview).
+- In the example below, we use [the `campaign` resource](https://developers.google.com/google-ads/api/fields/v14/campaign).
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/customers/{customer-id}/gaql?query={YOUR_GAQL_QUERY}
+```
+
+**Parameters**
+
+The `query` parameter is required and should be a valid GAQL query. The query should be URL encoded.
+
+For example:
+
+query: `SELECT campaign.name, campaign.id, metrics.impressions FROM campaign`
+
+GET request: `https://api.opteo.dev/v0/customers/1234567890/gaql?query=SELECT%20campaign.name,%20campaign.id,%20metrics.impressions%20FROM%20campaign`
+
+**Response**
+
+```
+{
+	"status": 200,
+	"data": [
+		{
+			"campaign": {
+				"name": "Frist Campaign",
+				"id": 685312434,
+				"resource_name": "customers/1234567890/campaigns/685312434"
+			},
+			"metrics": {
+				"impressions": 5951
+			}
+		},
+		{
+			"campaign": {
+				"name": "zzzCampaign #2 General CP",
+				"id": 685608890,
+				"resource_name": "customers/1234567890/campaigns/685608890"
+			},
+			"metrics": {
+				"impressions": 68004
+			}
+		},
+  ]
+}
 ```
