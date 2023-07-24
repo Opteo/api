@@ -298,32 +298,32 @@ GET https://api.opteo.dev/v0/reports
 
 ```javascript
 {
-	"status": 200,
-	"data": [
-		{
-			"accountId": 1234,
-			"accountName": "Plumbers Ltd",
-			"title": "Google Ads Report",
-			"fromDate": "2023-04-01",
-			"toDate": "2023-04-30",
-			"pdfPath": "/v0/reports/pdf/09440bbe-1638-4084-4378-c0d20e3ffefe"
-		},
-		{
-			"accountId": 1234,
-			"accountName": "Plumbers Ltd",
-			"title": "Google Ads Report",
-			"fromDate": "2023-03-01",
-			"toDate": "2023-03-30",
-			"pdfPath": "/v0/reports/pdf/daf46eb4-4901-45c4-9e75-de58db6effff"
-		},
-		{
-			"accountId": 3456,
-			"accountName": "Electricians Online",
-			"title": "Google Ads Report",
-			"fromDate": "2023-04-01",
-			"toDate": "2023-04-30",
-			"pdfPath": "/v0/reports/pdf/f1be9043-17a0-4a3d-8689-91d40deeffff"
-		}
+  "status": 200,
+  "data": [
+    {
+      "accountId": 1234,
+      "accountName": "Plumbers Ltd",
+      "title": "Google Ads Report",
+      "fromDate": "2023-04-01",
+      "toDate": "2023-04-30",
+      "pdfPath": "/v0/reports/pdf/09440bbe-1638-4084-4378-c0d20e3ffefe"
+    },
+    {
+      "accountId": 1234,
+      "accountName": "Plumbers Ltd",
+      "title": "Google Ads Report",
+      "fromDate": "2023-03-01",
+      "toDate": "2023-03-30",
+      "pdfPath": "/v0/reports/pdf/daf46eb4-4901-45c4-9e75-de58db6effff"
+    },
+    {
+      "accountId": 3456,
+      "accountName": "Electricians Online",
+      "title": "Google Ads Report",
+      "fromDate": "2023-04-01",
+      "toDate": "2023-04-30",
+      "pdfPath": "/v0/reports/pdf/f1be9043-17a0-4a3d-8689-91d40deeffff"
+    }
   ]
 }
 ```
@@ -372,28 +372,28 @@ GET request: `https://api.opteo.dev/v0/customers/1234567890/gaql?query=SELECT%20
 
 ```
 {
-	"status": 200,
-	"data": [
-		{
-			"campaign": {
-				"name": "Frist Campaign",
-				"id": 685312434,
-				"resource_name": "customers/1234567890/campaigns/685312434"
-			},
-			"metrics": {
-				"impressions": 5951
-			}
-		},
-		{
-			"campaign": {
-				"name": "zzzCampaign #2 General CP",
-				"id": 685608890,
-				"resource_name": "customers/1234567890/campaigns/685608890"
-			},
-			"metrics": {
-				"impressions": 68004
-			}
-		},
+  "status": 200,
+  "data": [
+    {
+      "campaign": {
+        "name": "Frist Campaign",
+        "id": 685312434,
+        "resource_name": "customers/1234567890/campaigns/685312434"
+      },
+      "metrics": {
+        "impressions": 5951
+      }
+    },
+    {
+      "campaign": {
+        "name": "zzzCampaign #2 General CP",
+        "id": 685608890,
+        "resource_name": "customers/1234567890/campaigns/685608890"
+      },
+      "metrics": {
+        "impressions": 68004
+      }
+    },
   ]
 }
 ```
