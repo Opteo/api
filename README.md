@@ -376,7 +376,7 @@ GET request: `https://api.opteo.dev/v0/customers/1234567890/gaql?query=SELECT%20
   "data": [
     {
       "campaign": {
-        "name": "Frist Campaign",
+        "name": "First Campaign",
         "id": 685312434,
         "resource_name": "customers/1234567890/campaigns/685312434"
       },
@@ -386,7 +386,7 @@ GET request: `https://api.opteo.dev/v0/customers/1234567890/gaql?query=SELECT%20
     },
     {
       "campaign": {
-        "name": "zzzCampaign #2 General CP",
+        "name": "Second Campaign",
         "id": 685608890,
         "resource_name": "customers/1234567890/campaigns/685608890"
       },
