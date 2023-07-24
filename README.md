@@ -370,7 +370,7 @@ GET request: `https://api.opteo.dev/v0/customers/1234567890/gaql?query=SELECT%20
 
 **Response**
 
-```
+```javascript
 {
   "status": 200,
   "data": [
