@@ -27,6 +27,9 @@ The Opteo API allows you to retrieve and modify your Opteo account data programm
   - [Get all reports](#get-all-reports)
   - [Get PDF](#get-a-report-pdf)
 - [GAQL](#gaql)
+- [Alerts](#alerts)
+  - [Get all alerts](#get-all-alerts)
+  - [Get all allerts for an account](#get-all-alerts-for-an-account)
 
 ## Introduction
 
