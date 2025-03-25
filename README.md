@@ -112,11 +112,11 @@ GET https://api.opteo.dev/v0/customers
   "status": 200,
   "data": [
     {
-      "customerId": "123-456-7890",
+      "customerId": "1234567890",
       "name": "Plumbers United"
     },
     {
-      "customerId": "098-765-4321",
+      "customerId": "0987654321",
       "name": "Electricians Online"
     }
   ]
@@ -304,7 +304,7 @@ GET https://api.opteo.dev/v0/reports
   "status": 200,
   "data": [
     {
-      "accountId": 1234,
+      "customerId": "1234",
       "accountName": "Plumbers Ltd",
       "title": "Google Ads Report",
       "fromDate": "2023-04-01",
@@ -312,7 +312,7 @@ GET https://api.opteo.dev/v0/reports
       "pdfPath": "/v0/reports/pdf/09440bbe-1638-4084-4378-c0d20e3ffefe"
     },
     {
-      "accountId": 1234,
+      "customerId": "1234",
       "accountName": "Plumbers Ltd",
       "title": "Google Ads Report",
       "fromDate": "2023-03-01",
@@ -320,7 +320,7 @@ GET https://api.opteo.dev/v0/reports
       "pdfPath": "/v0/reports/pdf/daf46eb4-4901-45c4-9e75-de58db6effff"
     },
     {
-      "accountId": 3456,
+      "customerId": "3456",
       "accountName": "Electricians Online",
       "title": "Google Ads Report",
       "fromDate": "2023-04-01",
@@ -423,24 +423,24 @@ GET https://api.opteo.dev/v0/alerts
 
 ```javascript
 {
-	"status": 200,
-	"data": [
-		{
-			"accountId": "123-456-7891", // Google Ads account Id
-			"alertId": "f24579d8-5bc9-4260-863e-fb9bf1ed2cc5", // Opteo alert id
-			"url": "https://app.opteo.com/user/:user_id/alerts/f24579d8-5bc9-4260-863e-fb9bf1ed2cc5",//Url to the alert in the Opteo UI
-			"type": "conversion", // Alert type
-			"created_ts": "2024-09-23T09:39:17.000Z", // Alert creation date
-			"text_description": "Last week the `Brand Campaigns` campaign group earned a record `254` conversions. That roughly equates to a `25%` improvement when compared with an average week. Congratulations!" // text description of the alert. Matches the Slack notification text.
-		},
-		{
-		  "accountId": "423-456-7892",
-			"alertId": "28e4f436-000e-4f66-8be3-252ba88b4f28",
-			"url": "https://app.opteo.com/user/:user_id/alerts/28e4f436-000e-4f66-8be3-252ba88b4f28",
-			"type": "delta",
-			"created_ts": "2024-09-18T07:11:19.000Z",
-			"text_description": "Opteo detected an unexpected change in the campaign `Best Campaign`. Between `September 16th` and `September 17th`, cost increased by `94.8%`. This change could be due to seasonality or because of a recent adjustment you made. If something seems out of place, consider checking up on this campaign."
-		}
+  "status": 200,
+  "data": [
+    {
+      "customerId": "1234567891", // Google Ads account Id
+      "alertId": "f24579d8-5bc9-4260-863e-fb9bf1ed2cc5", // Opteo alert id
+      "url": "https://app.opteo.com/user/:user_id/alerts/f24579d8-5bc9-4260-863e-fb9bf1ed2cc5",//Url to the alert in the Opteo UI
+      "type": "conversion", // Alert type
+      "createdTs": "2024-09-23T09:39:17.000Z", // Alert creation date
+      "textDescription": "Last week the `Brand Campaigns` campaign group earned a record `254` conversions. That roughly equates to a `25%` improvement when compared with an average week. Congratulations!" // text description of the alert. Matches the Slack notification text.
+    },
+    {
+      "customerId": "4234567892",
+      "alertId": "28e4f436-000e-4f66-8be3-252ba88b4f28",
+      "url": "https://app.opteo.com/user/:user_id/alerts/28e4f436-000e-4f66-8be3-252ba88b4f28",
+      "type": "delta",
+      "createdTs": "2024-09-18T07:11:19.000Z",
+      "textDescription": "Opteo detected an unexpected change in the campaign `Best Campaign`. Between `September 16th` and `September 17th`, cost increased by `94.8%`. This change could be due to seasonality or because of a recent adjustment you made. If something seems out of place, consider checking up on this campaign."
+    }
   ]
 }
 ```
@@ -465,23 +465,24 @@ GET https://api.opteo.dev/v0/customers/123-456-7891/alerts
 
 ```javascript
 {
-	"status": 200,
-	"data": [
-		{
-			"accountId": "123-456-7891",
-			"alertId": "f24579d8-5bc9-4260-863e-fb9bf1ed2cc5",
-			"url": "https://app.opteo.com/user/:user_id/alerts/f24579d8-5bc9-4260-863e-fb9bf1ed2cc5", 
-			"type": "conversion",
-			"created_ts": "2024-09-23T09:39:17.000Z",
-			"text_description": "Last week the `Brand Campaigns` campaign group earned a record `254` conversions. That roughly equates to a `25%` improvement when compared with an average week. Congratulations!"
-		},
-		{
-		  "accountId": "123-456-7891",
-			"alertId": "28e4f436-000e-4f66-8be3-252ba88b4f28",
-			"url": "https://app.opteo.com/user/:user_id/alerts/28e4f436-000e-4f66-8be3-252ba88b4f28",
-			"type": "budget",
-			"created_ts": "2024-09-18T07:11:19.000Z",
-			"text_description": "So far this August, you have spent about `$13515.94` of your `$18680` monthly budget. You are `94%` through the month, but you have spent about `72.36%` of the budget."
-		}
+  "status": 200,
+  "data": [
+    {
+      "customerId": "1234567891",
+      "alertId": "f24579d8-5bc9-4260-863e-fb9bf1ed2cc5",
+      "url": "https://app.opteo.com/user/:user_id/alerts/f24579d8-5bc9-4260-863e-fb9bf1ed2cc5",
+      "type": "conversion",
+      "createdTs": "2024-09-23T09:39:17.000Z",
+      "textDescription": "Last week the `Brand Campaigns` campaign group earned a record `254` conversions. That roughly equates to a `25%` improvement when compared with an average week. Congratulations!"
+    },
+    {
+      "customerId": "1234567891",
+      "alertId": "28e4f436-000e-4f66-8be3-252ba88b4f28",
+      "url": "https://app.opteo.com/user/:user_id/alerts/28e4f436-000e-4f66-8be3-252ba88b4f28",
+      "type": "budget",
+      "createdTs": "2024-09-18T07:11:19.000Z",
+      "textDescription": "So far this August, you have spent about `$13515.94` of your `$18680` monthly budget. You are `94%` through the month, but you have spent about `72.36%` of the budget."
+    }
   ]
 }
+```
