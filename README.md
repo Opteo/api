@@ -458,7 +458,7 @@ Returns latest alerts generated in the last 90d, up to 500.
 **URL**
 
 ```
-GET https://api.opteo.dev/v0/customers/123-456-7891/alerts
+GET https://api.opteo.dev/v0/customers/{customer-id}/alerts
 ```
 
 **Response**
