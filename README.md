@@ -16,29 +16,29 @@ The Opteo API allows you to retrieve and modify your Opteo account data programm
 - [Authentication](#authentication)
 - [Errors](#errors)
 - [Customers](#customers)
-  - [List](#list-customers)
-  - [Get linking state](#get-customer-linking-state)
-  - [Update connected team members](#update-connected-team-members)
-  - [Update changelog email](#update-changelog-email)
+    - [List](#list-customers)
+    - [Get linking state](#get-customer-linking-state)
+    - [Update connected team members](#update-connected-team-members)
+    - [Update changelog email](#update-changelog-email)
 - [Budgets](#budgets)
-  - [Get](#get-a-budget)
-  - [Update](#update-a-budget)
+    - [Get](#get-a-budget)
+    - [Update](#update-a-budget)
 - [Performance mode](#performance-mode)
-  - [Get](#get-performance-mode)
-  - [Update](#update-performance-mode)
+    - [Get](#get-performance-mode)
+    - [Update](#update-performance-mode)
 - [Performance goals](#performance-goals)
-  - [Get](#get-performance-goals)
-  - [Update](#update-performance-goals)
+    - [Get](#get-performance-goals)
+    - [Update](#update-performance-goals)
 - [Improvements](#improvements)
-  - [Get active](#get-active-improvements)
-  - [Get completed](#get-completed-improvements)
+    - [Get active](#get-active-improvements)
+    - [Get completed](#get-completed-improvements)
 - [Reports](#reports)
-  - [Get all reports](#get-all-reports)
-  - [Get PDF](#get-a-report-pdf)
+    - [Get all reports](#get-all-reports)
+    - [Get PDF](#get-a-report-pdf)
 - [GAQL](#gaql)
 - [Alerts](#alerts)
-  - [Get all alerts](#get-all-alerts)
-  - [Get all allerts for an account](#get-all-alerts-for-an-account)
+    - [Get all alerts](#get-all-alerts)
+    - [Get all allerts for an account](#get-all-alerts-for-an-account)
 
 ## Introduction
 
@@ -97,8 +97,8 @@ All failing requests will return the `status` code and a descriptive error `mess
 
 ```json
 {
-  "status": 403,
-  "message": "Forbidden - Client not active in Opteo, this may be due to a billing problem, or because it isn't selected in Linked Accounts"
+    "status": 403,
+    "message": "Forbidden - Client not active in Opteo, this may be due to a billing problem, or because it isn't selected in Linked Accounts"
 }
 ```
 
@@ -184,8 +184,6 @@ GET https://api.opteo.dev/v0/customers/{customer-id}/linking
 
 Replace the set of team members connected to a customer.
 
-This update is scoped to your API token's team only.
-
 **URL**
 
 ```
@@ -208,8 +206,6 @@ Notes:
 ### Update changelog email
 
 Set the platform connection used for changelog/change-history actions on a customer.
-
-This update is scoped to your API token's team only.
 
 **URL**
 
