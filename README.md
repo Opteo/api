@@ -17,6 +17,9 @@ The Opteo API allows you to retrieve and modify your Opteo account data programm
 - [Errors](#errors)
 - [Customers](#customers)
   - [List](#list-customers)
+  - [Get linking state](#get-customer-linking-state)
+  - [Update connected team members](#update-connected-team-members)
+  - [Update changelog email](#update-changelog-email)
 - [Budgets](#budgets)
   - [Get](#get-a-budget)
   - [Update](#update-a-budget)
@@ -103,12 +106,14 @@ All failing requests will return the `status` code and a descriptive error `mess
 
 ### List customers
 
-Get the list of customers (aka google ads accounts) that are accessible using the supplied API token. These customers must be [linked in Opteo](https://opteo.com/docs/en/articles/823760-link-unlink-accounts-to-your-account-centre).
+Get the list of customers (aka ad accounts) that are accessible using the supplied API token.
+
+By default, this returns only linked customers. You can include unlinked customers with the `status` query parameter.
 
 **URL**
 
 ```
-GET https://api.opteo.dev/v0/customers
+GET https://api.opteo.dev/v0/customers?status=linked|unlinked|all
 ```
 
 **Response**
@@ -119,15 +124,111 @@ GET https://api.opteo.dev/v0/customers
     "data": [
         {
             "customerId": "1234567890", // string: platform account ID used as `{customer-id}` in customer-scoped endpoints
-            "name": "Plumbers United" // string: account display name
+            "name": "Plumbers United", // string: account display name
+            "linked": true // boolean: derived from team member connections
         },
         {
             "customerId": "0987654321", // string
-            "name": "Electricians Online" // string
+            "name": "Electricians Online", // string
+            "linked": false // boolean
         }
     ]
 }
 ```
+
+`status` values:
+
+- `"linked"` (default)
+- `"unlinked"`
+- `"all"`
+
+### Get customer linking state
+
+Get team-member link state and available changelog email options for a customer.
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/customers/{customer-id}/linking
+```
+
+**Response**
+
+```javascript
+{
+  "status": 200,
+  "data": {
+    "customerId": "1234567890",
+    "linked": true, // boolean: true when at least one team member is connected
+    "teamMembers": [
+      {
+        "userEmail": "alice@example.com", // string: team member email
+        "isConnected": true // boolean: this member is connected to this customer
+      }
+    ],
+    "changelogEmails": [
+      {
+        "connectionEmail": "alice@example.com",
+        "isCurrent": true
+      },
+      {
+        "connectionEmail": "ops@example.com",
+        "isCurrent": false
+      }
+    ]
+  }
+}
+```
+
+### Update connected team members
+
+Replace the set of team members connected to a customer.
+
+This update is scoped to your API token's team only.
+
+**URL**
+
+```
+POST https://api.opteo.dev/v0/customers/{customer-id}/linking/team-members
+```
+
+**Parameters**
+
+```javascript
+{
+  "connectedMemberEmails": ["alice@example.com", "bob@example.com"] // string[]
+}
+```
+
+Notes:
+
+- Sending an empty array disconnects all team members from the customer.
+- Account `linked` status is derived: it is `true` when at least one team member is connected.
+
+### Update changelog email
+
+Set the platform connection used for changelog/change-history actions on a customer.
+
+This update is scoped to your API token's team only.
+
+**URL**
+
+```
+POST https://api.opteo.dev/v0/customers/{customer-id}/linking/changelog-email
+```
+
+**Parameters**
+
+```javascript
+{
+  "connectionEmail": "alice@example.com" // string: must match one of the emails in `changelogEmails`
+}
+```
+
+Notes:
+
+- The selected email must be present in this customer's `changelogEmails` list.
+- For Google Ads and Microsoft Ads, the corresponding login/parent customer ID is inferred server-side.
 
 ## Budgets
 
@@ -271,8 +372,6 @@ GET https://api.opteo.dev/v0/customers/{customer-id}/performance-goals
     }
 }
 ```
-
-"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
 
 ### Update performance goals
 
