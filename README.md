@@ -39,6 +39,9 @@ The Opteo API allows you to retrieve and modify your Opteo account data programm
 - [Alerts](#alerts)
     - [Get all alerts](#get-all-alerts)
     - [Get all allerts for an account](#get-all-alerts-for-an-account)
+- [Users](#users)
+    - [List](#list-users)
+- [Run Agent](#run-agent)
 
 ## Introduction
 
@@ -707,5 +710,91 @@ GET https://api.opteo.dev/v0/customers/{customer-id}/alerts
       "textDescription": "So far this August, you have spent about `$13515.94` of your `$18680` monthly budget. You are `94%` through the month, but you have spent about `72.36%` of the budget." // string
     }
   ]
+}
+```
+
+## Users
+
+### List users
+
+Get the list of users in your team.
+
+**URL**
+
+```
+GET https://api.opteo.dev/v0/users
+```
+
+**Response**
+
+```javascript
+{
+  "status": 200,
+  "data": [
+    {
+      "userId": 1, // number: Opteo user ID, used as `userId` in Run Agent
+      "name": "Alice Smith", // string|null: display name
+      "email": "alice@example.com" // string|null: user email / username
+    },
+    {
+      "userId": 2, // number
+      "name": "Bob Jones", // string|null
+      "email": "bob@example.com" // string|null
+    }
+  ]
+}
+```
+
+## Run Agent
+
+### Run agent
+
+Run an Opteo AI agent for a linked account. The request returns immediately with a `running` status. When the agent finishes, Opteo POSTs the result to the `callbackUrl` you provide.
+
+**URL**
+
+```
+POST https://api.opteo.dev/v0/customers/{customer-id}/run-agent
+```
+
+**Parameters**
+
+```javascript
+{
+  "userId": 1, // number: ID of the Opteo user to run the agent as (see List users)
+  "prompt": "What is my budget this month?", // string: the prompt to send to the agent
+  "llmModel": "openai/gpt-5.4", // string: model in "provider/modelId" format
+  "callbackUrl": "https://your-server.com/callback", // string: URL to POST the result to when complete
+  "visible": false, // boolean (optional, default false): make the chat visible in Opteo UI
+  "chatLinkMakeVisible": true // boolean (optional, default true): opening the returned chatLink will make the chat visible in Opteo
+}
+```
+
+**Immediate response** (`200`)
+
+```javascript
+{
+  "chatId": "ext_a1b2c3d4-...", // string: unique ID for this agent run
+  "userId": 1, // number
+  "customerId": "1234567890", // string
+  "prompt": "What is my budget this month?", // string
+  "status": "running", // string: always "running" on the immediate response
+  "chatResult": "", // string: empty until the callback fires
+  "chatLink": "https://app.opteo.com/c/ext_a1b2c3d4-...", // string: link to the chat in Opteo
+  "visible": false // boolean
+}
+```
+
+**Callback payload** (POSTed to `callbackUrl` when the agent finishes)
+
+```javascript
+{
+  "chatId": "ext_a1b2c3d4-...", // string
+  "userId": 1, // number
+  "customerId": "1234567890", // string
+  "prompt": "What is my budget this month?", // string
+  "status": "success", // string: "success" | "error"
+  "chatResult": "Your budget this month is $5,000.", // string: agent's response text
+  "chatLink": "https://app.opteo.com/c/ext_a1b2c3d4-..." // string
 }
 ```
