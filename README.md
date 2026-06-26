@@ -8,7 +8,9 @@
 
 The Opteo API allows you to retrieve and modify your Opteo account data programmatically, for example listing improvements or updating the budget of an account. The API is based on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) principles.
 
-> ⚠️ The Opteo API is currently invite only and still a work in progress
+> ⚠️ The Opteo API is currently invite only.
+>
+> 🧠 Looking for the Opteo MCP? Check this instead: https://opteo.com/docs/en/articles/15564041-opteo-mcp
 
 ## Table of Contents
 
